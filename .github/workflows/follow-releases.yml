@@ -1,0 +1,29 @@
+# Keeps Casks/maxwell.rb on Maxwell's latest release. Runs twice an hour and on demand, with
+# Maxwell's own packaging/homebrew/bump-cask.sh, so the cask logic lives in one place.
+# This repo's GITHUB_TOKEN may push here, so no secret is needed. Running it twice changes nothing.
+name: Follow Maxwell releases
+
+on:
+  schedule:
+    - cron: "17,47 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: follow-releases
+
+jobs:
+  bump:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - name: Point the cask at the latest release
+        run: |
+          gh auth setup-git
+          V=$(gh release view -R robinsadeghpour/maxwell --json tagName -q .tagName)
+          curl -fsSL https://raw.githubusercontent.com/robinsadeghpour/maxwell/main/packaging/homebrew/bump-cask.sh -o bump-cask.sh
+          bash bump-cask.sh "${V#v}"
