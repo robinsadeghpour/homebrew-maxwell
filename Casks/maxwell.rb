@@ -31,7 +31,7 @@ cask "maxwell" do
   ]
 
   caveats <<~EOS
-    Open Maxwell and choose Maxwell › Install Hooks to connect it to Claude Code.
+    Open Maxwell: Set up Maxwell connects it to Claude Code.
     Before you uninstall, choose Maxwell › Uninstall Hooks.
   EOS
 end
