@@ -1,6 +1,6 @@
 cask "maxwell" do
-  version "0.1.60"
-  sha256 "d8393ab1a70afdae203a15ceca5f57093d55151db761435ca39c36136d03626f"
+  version "0.1.62"
+  sha256 "03b28d81208636694bc9bffc6e97a115a3e3c66d1709c666f3a48c3851af600f"
 
   url "https://github.com/robinsadeghpour/maxwell/releases/download/v#{version}/Maxwell-v#{version}.dmg"
   name "Maxwell"
